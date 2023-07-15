@@ -38,7 +38,7 @@ const Trending = () => {
                     <img
                       src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                       alt="trending Movie"
-                      className="hover:scale-[1.5]"
+                      className="hover:scale-[1.1]"
                     />
                   </div>
                 </NavLink>
