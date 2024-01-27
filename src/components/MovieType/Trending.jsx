@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchTrendingMovie } from "../../api/api";
 import { NavLink } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 const Trending = () => {
   const [trending, setTrending] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     let fetch = async () => {
-      setIsLoading(true);
       let res = await fetchTrendingMovie();
       setTrending(res);
       setIsLoading(false);

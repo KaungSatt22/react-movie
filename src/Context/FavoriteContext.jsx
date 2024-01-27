@@ -1,10 +1,6 @@
 import React, { createContext, useState } from "react";
 
-const FavoriteContext = createContext({
-  favMovie: [],
-  addFavMovie: () => {},
-  removeMovie: () => {},
-});
+const FavoriteContext = createContext({});
 
 export const FavoriteProvider = ({ children }) => {
   const [favMovie, setFavMoive] = useState([]);

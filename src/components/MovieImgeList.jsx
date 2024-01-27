@@ -19,7 +19,7 @@ const MovieImgeList = ({ poster_path, title, id, vote_average }) => {
       </div>
       <div className="bg-slate-50 p-3 text-center">
         <h2 className="text-xl font-bold">{title}</h2>
-        <p>Rating :{vote_average}</p>
+        <p>Rating : {vote_average} ⭐</p>
       </div>
     </Link>
   );

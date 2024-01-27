@@ -22,13 +22,19 @@ const Movie = () => {
       let res = await fetchSingleMovie(id);
       setIsLoading(false);
       setMovie(res);
-      let findOFFVideo = res.videos.results.find(
+      let findOFFVideo = res.videos.results?.find(
         (video) => video.name === "Official Trailer"
-      ).key;
-      setVideo(findOFFVideo);
+      );
+      if (findOFFVideo) {
+        setVideo(findOFFVideo.key);
+      }
     };
     fetch();
   }, [id]);
+  useEffect(() => {
+    document.title = movie.title;
+    return () => (document.title = "React Movie");
+  }, [movie.title]);
   let genres = movie?.genres?.map((gen) => gen.name);
   return (
     <div>
@@ -41,7 +47,6 @@ const Movie = () => {
             style={{
               backgroundImage: `url("https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}")`,
               backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
             }}
           >
             <div>

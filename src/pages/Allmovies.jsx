@@ -1,26 +1,28 @@
 import React, { Suspense, lazy } from "react";
-import { SuspenseLoading } from "../components/Loading/Loading";
-import Trending from "../components/MovieType/Trending";
-import Romance from "../components/MovieType/Romance";
-import Comedy from "../components/MovieType/Comedy";
-import Horror from "../components/MovieType/Horror";
-import Latest from "../components/MovieType/Latest";
+
+const Trending = lazy(() => import("../components/MovieType/Trending"));
+const Romance = lazy(() => import("../components/MovieType/Romance"));
+const Comedy = lazy(() => import("../components/MovieType/Comedy"));
+const Horror = lazy(() => import("../components/MovieType/Horror"));
+const Latest = lazy(() => import("../components/MovieType/Latest"));
 
 import { useSearch } from "../hooks/useSearch";
+import { SuspenseLoading } from "../components/Loading/Loading";
+import InputRadio from "../components/InputRadio";
 const Allmovies = () => {
   const { movieType, movieTypeHandler } = useSearch();
   let showComponent;
   switch (movieType) {
-    case "comedy":
+    case "Comedy":
       showComponent = <Comedy />;
       break;
-    case "romance":
+    case "Romance":
       showComponent = <Romance />;
       break;
-    case "horror":
+    case "Horror":
       showComponent = <Horror />;
       break;
-    case "latest":
+    case "Latest":
       showComponent = <Latest />;
     default:
       showComponent = <Latest />;
@@ -30,53 +32,30 @@ const Allmovies = () => {
     <div className="overflow-x-hidden">
       <Trending />
       <h2 className="text-2xl text-center mt-5">Movie Type</h2>
-      <div className="flex justify-center itmes-center gap-5">
-        <div className="space-x-2">
-          <input
-            type="radio"
-            name="type"
-            id="latest"
-            value="latest"
-            onChange={movieTypeHandler}
-            checked={movieType === "latest" ? true : false}
-          />
-          <label htmlFor="latest">Latest</label>
-        </div>
-        <div className="space-x-2">
-          <input
-            type="radio"
-            name="type"
-            id="comedy"
-            value="comedy"
-            onChange={movieTypeHandler}
-            checked={movieType === "comedy" ? true : false}
-          />
-          <label htmlFor="comedy">Comedy</label>
-        </div>
-        <div className="space-x-2">
-          <input
-            type="radio"
-            name="type"
-            id="romance"
-            value="romance"
-            onChange={movieTypeHandler}
-            checked={movieType === "romance" ? true : false}
-          />
-          <label htmlFor="romance">Romance</label>
-        </div>
-        <div className="space-x-2">
-          <input
-            type="radio"
-            name="type"
-            id="horror"
-            value="horror"
-            onChange={movieTypeHandler}
-            checked={movieType === "horror" ? true : false}
-          />
-          <label htmlFor="horror">Horror</label>
-        </div>
+      <div className="flex justify-center itmes-center gap-5 mt-5">
+        <InputRadio
+          onChange={movieTypeHandler}
+          radioType="Latest"
+          movieType={movieType}
+        />
+        <InputRadio
+          onChange={movieTypeHandler}
+          radioType="Comedy"
+          movieType={movieType}
+        />
+        <InputRadio
+          onChange={movieTypeHandler}
+          radioType="Romance"
+          movieType={movieType}
+        />
+
+        <InputRadio
+          onChange={movieTypeHandler}
+          radioType="Horror"
+          movieType={movieType}
+        />
       </div>
-      {showComponent}
+      <Suspense fallback={<SuspenseLoading />}>{showComponent}</Suspense>
     </div>
   );
 };

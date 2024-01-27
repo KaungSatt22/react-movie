@@ -21,7 +21,7 @@ export const SuspenseLoading = () => {
   return (
     <div className="grid grid-cols-fluid gap-[5rem] p-5">
       {newArr.map((_, i) => (
-        <Loading />
+        <Loading key={i} />
       ))}
     </div>
   );

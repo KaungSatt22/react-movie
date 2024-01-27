@@ -1,8 +1,14 @@
 import React from "react";
 import { useSearch } from "../hooks/useSearch";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const { search, searchHandler } = useSearch();
+  const navigate = useNavigate();
+  const handleSearch = (e) => {
+    searchHandler(e.target.value);
+    navigate("/");
+  };
   return (
     <div className=" bg-slate-600 ">
       <nav className="container mx-auto flex flex-col lg:flex-row gap-5 items-center h-[15vh] lg:justify-between lg:h-[10vh] p-3">
@@ -26,13 +32,23 @@ const Navbar = () => {
           >
             <h2 className="p-1 text-white lg:text-xl lg:p-3">Fav Movies</h2>
           </NavLink>
-          <input
-            type="text"
-            value={search}
-            className="px-2 w-1/3 lg:w-auto lg:p-2 lg:text-xl rounded-md outline-none"
-            placeholder="Search Movie Name"
-            onChange={searchHandler}
-          />
+          <div className="relative flex items-center">
+            <input
+              type="text"
+              value={search}
+              className="px-2 w-1/3 lg:w-auto lg:p-2 lg:text-xl rounded-md outline-none "
+              placeholder="Search Movie Name"
+              onChange={handleSearch}
+            />
+            {search.length > 1 && (
+              <button
+                className="absolute right-0"
+                onClick={() => searchHandler("")}
+              >
+                ❌
+              </button>
+            )}
+          </div>
         </div>
       </nav>
     </div>

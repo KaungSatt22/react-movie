@@ -1,21 +1,16 @@
 import { createContext, useState } from "react";
 
-export const SearchContext = createContext({
-  search: "",
-  movieType: "latest",
-  movieTypeHandler: () => {},
-  searchHandler: () => {},
-});
+export const SearchContext = createContext({});
 
 export const ContextProvider = ({ children }) => {
   const [search, setSearch] = useState("");
-  const [movieType, setMovieType] = useState("latest");
+  const [movieType, setMovieType] = useState("Latest");
   const movieTypeHandler = (e) => {
     setMovieType(e.target.value);
   };
-  const searchHandler = (e) => {
-    setSearch(e.target.value);
-    setMovieType("latest");
+  const searchHandler = (movie) => {
+    setSearch(movie);
+    setMovieType("Latest");
   };
   return (
     <SearchContext.Provider
