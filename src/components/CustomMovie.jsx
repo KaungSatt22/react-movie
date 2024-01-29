@@ -3,17 +3,18 @@ import MovieImgeList from "./MovieImgeList";
 import Loading from "./Loading/Loading";
 
 const CustomMovie = ({ movieType, param, fetchfunType }) => {
-  console.log(fetchfunType);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    const controller = new AbortController();
     let fetch = async () => {
       setIsLoading(true);
-      let res = await fetchfunType(param);
+      let res = await fetchfunType(param, controller);
       setMovies(res);
       setIsLoading(false);
     };
     fetch();
+    return () => controller.abort();
   }, [param]);
 
   return (

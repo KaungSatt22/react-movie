@@ -9,6 +9,7 @@ const Latest = lazy(() => import("../components/MovieType/Latest"));
 import { useSearch } from "../hooks/useSearch";
 import { SuspenseLoading } from "../components/Loading/Loading";
 import InputRadio from "../components/InputRadio";
+
 const Allmovies = () => {
   const { movieType, movieTypeHandler } = useSearch();
   let showComponent;
